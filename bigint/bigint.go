@@ -52,6 +52,9 @@ func StrToBigInt(number string) (BigInt, error) {
 	} else {
 		sign = '+'
 	}
+	if number != "0" {
+		number = strings.TrimLeft(number, "0")
+	}
 	var num BigInt
 	num.num = make([]uint8, 0)
 	if sign == '-' || sign == '+' {

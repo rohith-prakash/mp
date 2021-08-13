@@ -11,4 +11,6 @@ func main() {
 	test.TestHelp("- 12345")
 	test.TestHelp("1+2345")
 	test.TestHelp("*12345")
+	test.TestHelp("-0001112")
+	test.TestHelp("-0")
 }
