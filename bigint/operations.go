@@ -16,17 +16,13 @@ func MagnitudeAdd(a BigInt, b BigInt) BigInt {
 	len_b := len(b.num)
 	var len1, len2 int
 	if len_a < len_b {
-		l1 = make([]uint8, len_a)
-		l2 = make([]uint8, len_b)
-		copy(l1, a.num)
-		copy(l2, b.num)
+		l1 = a.num
+		l2 = b.num
 		len1 = len_a
 		len2 = len_b
 	} else {
-		l1 = make([]uint8, len_b)
-		l2 = make([]uint8, len_a)
-		copy(l1, b.num)
-		copy(l2, a.num)
+		l1 = b.num
+		l2 = a.num
 		len1 = len_b
 		len2 = len_a
 	}
