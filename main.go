@@ -5,9 +5,9 @@ import (
 )
 
 func main() {
-	test.CompareTest("100", "10")
-	test.CompareTest("-100", "100")
-	test.CompareTest("-100", "-100")
-	test.CompareTest("100", "-100")
-	test.CompareTest("-10", "-100")
+	test.LogicalOperatorsTest("100", "10")
+	test.LogicalOperatorsTest("-100", "100")
+	test.LogicalOperatorsTest("-100", "-100")
+	test.LogicalOperatorsTest("100", "-100")
+	test.LogicalOperatorsTest("-10", "-100")
 }

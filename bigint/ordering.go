@@ -63,3 +63,19 @@ func Compare(a BigInt, b BigInt) Ordering {
 		}
 	}
 }
+
+func LessThan(a BigInt, b BigInt) bool {
+	return Compare(a, b) == Lesser
+}
+
+func GreaterThan(a BigInt, b BigInt) bool {
+	return Compare(a, b) == Greater
+}
+
+func EqualTo(a BigInt, b BigInt) bool {
+	return Compare(a, b) == Equal
+}
+
+func NotEqualTo(a BigInt, b BigInt) bool {
+	return Compare(a, b) != Equal
+}

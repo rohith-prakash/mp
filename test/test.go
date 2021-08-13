@@ -65,3 +65,23 @@ func CompareTest(a string, b string) {
 		fmt.Println("Unexpected outcome")
 	}
 }
+
+func LogicalOperatorsTest(a string, b string) {
+	a2, err := bigint.StrToBigInt(a)
+	if err != nil {
+		fmt.Println("A cannot be converted")
+		return
+	}
+	b2, err := bigint.StrToBigInt(b)
+	if err != nil {
+		fmt.Println("A cannot be converted")
+		return
+	}
+	if bigint.LessThan(a2, b2) {
+		fmt.Println(a, " is less than ", b)
+	} else if bigint.GreaterThan(a2, b2) {
+		fmt.Println(a, " is greater than ", b)
+	} else if bigint.EqualTo(a2, b2) {
+		fmt.Println(a, " is equal to ", b)
+	}
+}
