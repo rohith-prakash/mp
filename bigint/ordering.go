@@ -19,7 +19,7 @@ func MagnitudeCompare(A BigInt, B BigInt) Ordering {
 	} else if a_len < b_len {
 		return Lesser
 	} else {
-		for i := 0; i < a_len; i++ {
+		for i := a_len - 1; i >= 0; i-- {
 			if a[i] > b[i] {
 				return Greater
 			} else if a[i] < b[i] {

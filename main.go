@@ -1,14 +1,25 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/rohith-prakash/mp/test"
 )
 
 func main() {
-	test.TestHelp("0123")
-	test.TestHelp("12345")
-	test.TestHelp("- 500")
-	test.TestHelp("0")
-	test.TestHelp("00")
-	test.TestHelp("-00")
+	test.MagnitudeCompareTest("1200", "1021")
+	test.MagnitudeCompareTest("- 1200", "- 1021")
+	test.MagnitudeCompareTest("-1000", "0")
+	test.MagnitudeCompareTest("-0", "0")
+	test.MagnitudeCompareTest("-12", "12")
+	test.MagnitudeCompareTest("0", "1021")
+	test.MagnitudeCompareTest("-1200", "1021")
+	fmt.Println("##################")
+	test.CompareTest("1200", "1021")
+	test.CompareTest("- 1200", "- 1021")
+	test.CompareTest("-1000", "0")
+	test.CompareTest("-0", "0")
+	test.CompareTest("-12", "12")
+	test.CompareTest("0", "1021")
+	test.CompareTest("-1200", "1021")
 }
