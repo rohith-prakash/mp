@@ -2,7 +2,6 @@ package bigint
 
 import (
 	"errors"
-	"regexp"
 	"strings"
 )
 
@@ -22,12 +21,31 @@ func (a *BigInt) addToNum(c rune) {
 	a.num = append(a.num, uint8(c-'0'))
 }
 
+func IsInt(s string) bool {
+	if len(s) == 0 {
+		return false
+	}
+	if (s[0] != '-' && s[0] != '+') && (s[0] < '0' || s[0] > '9') {
+		return false
+	}
+	for _, c := range s[1:] {
+		if c < '0' || c > '9' {
+			return false
+		}
+	}
+	return true
+}
+
 func StrToBigInt(number string) (BigInt, error) {
 	number = strings.ReplaceAll(number, " ", "")
-	matched, err := regexp.MatchString(`[-+]?[0-9]`, number)
-	if err != nil {
-		return BigInt{}, err
-	} else if !matched {
+	//matched, err := regexp.MatchString(`[-+]?[0-9]*`, number)
+	//var digitCheck = regexp.MustCompile(`^[0-9]+$`)
+	//fmt.Println(matched, err)
+	// if err != nil {
+	// 	return BigInt{}, err
+	// }
+	matched := IsInt(number)
+	if !matched {
 		return BigInt{}, errors.New("Not a valid number to be converted to BigInt")
 	}
 	var num BigInt

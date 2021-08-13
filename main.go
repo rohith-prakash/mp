@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	a := "12345"
+	a := "+12345"
 	b := "- 12345"
 	c, err := bigint.StrToBigInt(a)
 	if err != nil {
