@@ -38,19 +38,29 @@ func IsInt(s string) bool {
 
 func StrToBigInt(number string) (BigInt, error) {
 	number = strings.ReplaceAll(number, " ", "")
+	var sign rune
 	matched := IsInt(number)
 	if !matched {
 		return BigInt{}, errors.New("Not a valid number to be converted to BigInt")
 	}
+	if number[0] == '-' {
+		sign = '-'
+		number = number[1:]
+	} else if number[0] == '+' {
+		sign = '+'
+		number = number[1:]
+	} else {
+		sign = '+'
+	}
 	var num BigInt
 	num.num = make([]uint8, 0)
-	if number[0] == '-' || number[0] == '+' {
-		if number[0] == '-' {
+	if sign == '-' || sign == '+' {
+		if sign == '-' {
 			num.sign = Negative
-		} else if number[0] == '+' {
+		} else if sign == '+' {
 			num.sign = Positive
 		}
-		for _, c := range number[1:] {
+		for _, c := range number {
 			num.addToNum(c)
 		}
 	} else {
