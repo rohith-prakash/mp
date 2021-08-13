@@ -12,6 +12,14 @@ const (
 	Negative
 )
 
+type Ordering int
+
+const (
+	Lesser Ordering = iota
+	Equal
+	Greater
+)
+
 type BigInt struct {
 	sign Sign
 	num  []uint8
@@ -85,4 +93,25 @@ func (num BigInt) ToString() string {
 		sb.WriteString(string(num.num[i] + '0'))
 	}
 	return sb.String()
+}
+
+func MagnitudeCompare(A BigInt, B BigInt) Ordering {
+	a := A.num
+	b := B.num
+	a_len := len(a)
+	b_len := len(b)
+	if a_len > b_len {
+		return Greater
+	} else if a_len < b_len {
+		return Lesser
+	} else {
+		for i := 0; i < a_len; i++ {
+			if a[i] > b[i] {
+				return Greater
+			} else if a[i] < b[i] {
+				return Lesser
+			}
+		}
+		return Equal
+	}
 }
