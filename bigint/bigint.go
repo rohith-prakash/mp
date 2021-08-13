@@ -38,12 +38,6 @@ func IsInt(s string) bool {
 
 func StrToBigInt(number string) (BigInt, error) {
 	number = strings.ReplaceAll(number, " ", "")
-	//matched, err := regexp.MatchString(`[-+]?[0-9]*`, number)
-	//var digitCheck = regexp.MustCompile(`^[0-9]+$`)
-	//fmt.Println(matched, err)
-	// if err != nil {
-	// 	return BigInt{}, err
-	// }
 	matched := IsInt(number)
 	if !matched {
 		return BigInt{}, errors.New("Not a valid number to be converted to BigInt")
