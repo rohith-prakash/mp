@@ -30,11 +30,7 @@ func MagnitudeAdd(a BigInt, b BigInt) BigInt {
 		len1 = len_b
 		len2 = len_a
 	}
-	reverse(l1)
-	reverse(l2)
-	//fmt.Print(l1)
-	//fmt.Print(l2)
-	//fmt.Println(len1 + len2)
+
 	for i = 0; i < len1; i++ {
 		sum = l1[i] + l2[i] + carry
 		result = append(result, sum%10)
@@ -46,7 +42,6 @@ func MagnitudeAdd(a BigInt, b BigInt) BigInt {
 		carry = sum / 10
 	}
 
-	reverse(result)
 	return BigInt{
 		sign: Positive,
 		num:  result,
