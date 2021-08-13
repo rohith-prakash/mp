@@ -5,7 +5,10 @@ import (
 )
 
 func main() {
-	test.MagnitudeAddTest("123", "456")
-	test.MagnitudeAddTest("0", "123")
-	test.MagnitudeAddTest("9", "21")
+	test.TestHelp("0123")
+	test.TestHelp("12345")
+	test.TestHelp("- 500")
+	test.TestHelp("0")
+	test.TestHelp("00")
+	test.TestHelp("-00")
 }

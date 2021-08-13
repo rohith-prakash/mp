@@ -52,10 +52,10 @@ func StrToBigInt(number string) (BigInt, error) {
 	} else {
 		sign = '+'
 	}
-	if number != "0" {
-		number = strings.TrimLeft(number, "0")
-	} else {
+	number = strings.TrimLeft(number, "0")
+	if number == "" {
 		sign = '+'
+		number = "0"
 	}
 	var num BigInt
 	num.num = make([]uint8, 0)
@@ -73,6 +73,7 @@ func StrToBigInt(number string) (BigInt, error) {
 			num.addToNum(c)
 		}
 	}
+	reverse(num.num)
 	return num, nil
 }
 
@@ -81,7 +82,8 @@ func (num BigInt) ToString() string {
 	if num.sign == Negative {
 		sb.WriteString("-")
 	}
-	for i := range num.num {
+	length := len(num.num)
+	for i := length - 1; i >= 0; i-- {
 		sb.WriteString(string(num.num[i] + '0'))
 	}
 	return sb.String()
