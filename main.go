@@ -5,11 +5,11 @@ import (
 )
 
 func main() {
-	test.MagnitudeAddTest("12", "15")
-	test.MagnitudeAddTest("121", "15")
-	test.MagnitudeAddTest("12", "15")
-	test.MagnitudeAddTest("0", "15")
-	test.MagnitudeAddTest("15", "15")
-	test.MagnitudeAddTest("12", "151")
-	test.MagnitudeAddTest("12", "152")
+	test.MagnitudeSubTest("15", "12")
+	test.MagnitudeSubTest("121", "15")
+	test.MagnitudeSubTest("120", "15")
+	test.MagnitudeSubTest("0", "0")
+	test.MagnitudeSubTest("15", "15")
+	test.MagnitudeSubTest("1222", "151")
+	test.MagnitudeSubTest("1521", "152")
 }

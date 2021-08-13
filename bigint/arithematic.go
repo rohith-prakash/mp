@@ -1,16 +1,20 @@
 package bigint
 
-func reverse(l []uint8) {
+import (
+	"errors"
+)
+
+func reverse(l []int8) {
 	for i, j := 0, len(l)-1; i < j; i, j = i+1, j-1 {
 		l[i], l[j] = l[j], l[i]
 	}
 }
 
 func MagnitudeAdd(a BigInt, b BigInt) BigInt {
-	var result []uint8
-	var l1, l2 []uint8
+	var result []int8
+	var l1, l2 []int8
 	var i = 0
-	var carry, sum uint8
+	var carry, sum int8
 	carry, sum = 0, 0
 	len_a := len(a.num)
 	len_b := len(b.num)
@@ -42,6 +46,44 @@ func MagnitudeAdd(a BigInt, b BigInt) BigInt {
 		sign: Positive,
 		num:  result,
 	}
+}
+
+//Unless |a|>= |b| don't use this
+func MagnitudeSub(a BigInt, b BigInt) (BigInt, error) {
+	var result []int8
+	var carry, diff int8
+	var i int
+	l1, l2 := a.num, b.num
+	len1 := len(l1)
+	len2 := len(l2)
+	if len2 > len1 {
+		return BigInt{}, errors.New("Numer with larger magnitude must be first argument")
+	}
+	carry = 0
+	for i = 0; i < len2; i++ {
+		diff = ((l1[i] - l2[i]) - carry)
+		if diff < 0 {
+			diff += 10
+			carry++
+		} else {
+			carry = 0
+		}
+		result = append(result, diff)
+	}
+	for i = len2; i < len1; i++ {
+		diff = l1[i] - carry
+		if diff < 0 {
+			diff += 10
+			carry++
+		} else {
+			carry = 0
+		}
+		result = append(result, diff)
+	}
+	return BigInt{
+		sign: Positive,
+		num:  result,
+	}, nil
 }
 
 // func Add(a BigInt,b BigInt) BigInt {

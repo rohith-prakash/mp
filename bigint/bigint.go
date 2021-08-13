@@ -14,11 +14,11 @@ const (
 
 type BigInt struct {
 	sign Sign
-	num  []uint8
+	num  []int8
 }
 
 func (a *BigInt) addToNum(c rune) {
-	a.num = append(a.num, uint8(c-'0'))
+	a.num = append(a.num, int8(c-'0'))
 }
 
 func IsInt(s string) bool {
@@ -58,7 +58,7 @@ func StrToBigInt(number string) (BigInt, error) {
 		number = "0"
 	}
 	var num BigInt
-	num.num = make([]uint8, 0)
+	num.num = make([]int8, 0)
 	if sign == '-' || sign == '+' {
 		if sign == '-' {
 			num.sign = Negative
