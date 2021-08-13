@@ -5,9 +5,7 @@ import (
 )
 
 func main() {
-	test.LogicalOperatorsTest("100", "10")
-	test.LogicalOperatorsTest("-100", "100")
-	test.LogicalOperatorsTest("-100", "-100")
-	test.LogicalOperatorsTest("100", "-100")
-	test.LogicalOperatorsTest("-10", "-100")
+	test.MagnitudeAddTest("123", "456")
+	test.MagnitudeAddTest("0", "123")
+	test.MagnitudeAddTest("9", "21")
 }

@@ -85,3 +85,18 @@ func LogicalOperatorsTest(a string, b string) {
 		fmt.Println(a, " is equal to ", b)
 	}
 }
+
+func MagnitudeAddTest(a string, b string) {
+	a2, err := bigint.StrToBigInt(a)
+	if err != nil {
+		fmt.Println("A cannot be converted")
+		return
+	}
+	b2, err := bigint.StrToBigInt(b)
+	if err != nil {
+		fmt.Println("A cannot be converted")
+		return
+	}
+	c := bigint.MagnitudeAdd(a2, b2)
+	fmt.Println(a2.ToString(), "+", b2.ToString(), "=", c.ToString())
+}
