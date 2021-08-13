@@ -42,3 +42,26 @@ func MagnitudeCompareTest(a string, b string) {
 		fmt.Println("Unexpected outcome")
 	}
 }
+
+func CompareTest(a string, b string) {
+	a2, err := bigint.StrToBigInt(a)
+	if err != nil {
+		fmt.Println("A cannot be converted")
+		return
+	}
+	b2, err := bigint.StrToBigInt(b)
+	if err != nil {
+		fmt.Println("A cannot be converted")
+		return
+	}
+	switch bigint.Compare(a2, b2) {
+	case bigint.Lesser:
+		fmt.Println(a, "<", b)
+	case bigint.Equal:
+		fmt.Println(a, "==", b)
+	case bigint.Greater:
+		fmt.Println(a, ">", b)
+	default:
+		fmt.Println("Unexpected outcome")
+	}
+}
