@@ -43,3 +43,8 @@ func MagnitudeAdd(a BigInt, b BigInt) BigInt {
 		num:  result,
 	}
 }
+
+// func Add(a BigInt,b BigInt) BigInt {
+// 	c := MagnitudeAdd(a,b)
+
+// }
