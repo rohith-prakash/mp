@@ -11,7 +11,7 @@ func reverse(l []int8) {
 }
 
 func MagnitudeAdd(a BigInt, b BigInt) BigInt {
-	var result []int8
+	var result []int8 = make([]int8, 0)
 	var l1, l2 []int8
 	var i = 0
 	var carry, sum int8
@@ -50,13 +50,16 @@ func MagnitudeAdd(a BigInt, b BigInt) BigInt {
 
 //Unless |a|>= |b| don't use this
 func MagnitudeSub(a BigInt, b BigInt) (BigInt, error) {
-	var result []int8
+	var result []int8 = make([]int8, 0)
 	var carry, diff int8
 	var i int
 	l1, l2 := a.num, b.num
 	len1 := len(l1)
 	len2 := len(l2)
-	if len2 > len1 {
+	// if len2 > len1 {
+	// 	return BigInt{}, errors.New("Numer with larger magnitude must be first argument")
+	// }
+	if MagnitudeCompare(a, b) == Lesser {
 		return BigInt{}, errors.New("Numer with larger magnitude must be first argument")
 	}
 	carry = 0
@@ -80,10 +83,12 @@ func MagnitudeSub(a BigInt, b BigInt) (BigInt, error) {
 		}
 		result = append(result, diff)
 	}
-	return BigInt{
+	answer := BigInt{
 		sign: Positive,
 		num:  result,
-	}, nil
+	}
+	answer.Clean()
+	return answer, nil
 }
 
 func (a BigInt) checkIfAllZero() bool {
