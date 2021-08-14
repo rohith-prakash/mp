@@ -167,3 +167,33 @@ func Add(a BigInt, b BigInt) BigInt {
 	c.Clean()
 	return c
 }
+
+func (a BigInt) Abs() BigInt {
+	var num []int8 = make([]int8, len(a.num))
+	copy(num, a.num)
+	c := BigInt{
+		sign: Positive,
+		num:  num,
+	}
+	return c
+}
+
+func (a BigInt) Negate() BigInt {
+	var num []int8 = make([]int8, len(a.num))
+	copy(num, a.num)
+	var sign Sign
+	if a.sign == Negative || a.checkIfAllZero() {
+		sign = Positive
+	} else {
+		sign = Negative
+	}
+	c := BigInt{
+		sign: sign,
+		num:  num,
+	}
+	return c
+}
+
+func Sub(a BigInt, b BigInt) BigInt {
+	return Add(a, b.Negate())
+}
