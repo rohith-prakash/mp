@@ -86,6 +86,32 @@ func MagnitudeSub(a BigInt, b BigInt) (BigInt, error) {
 	}, nil
 }
 
+func (a BigInt) checkIfAllZero() bool {
+	for i := range a.num {
+		if a.num[i] != 0 {
+			return false
+		}
+	}
+	return true
+}
+
+func (a *BigInt) Clean() {
+	if a.checkIfAllZero() {
+		a.sign = Positive
+		a.num = []int8{0}
+		return
+	}
+	var numOfZeros int = 0
+	length := len(a.num)
+	for i := length - 1; i > 0; i-- {
+		if a.num[i] != 0 {
+			break
+		}
+		numOfZeros++
+	}
+	a.num = a.num[:length-numOfZeros]
+}
+
 // func Add(a BigInt,b BigInt) BigInt {
 // 	c := MagnitudeAdd(a,b)
 

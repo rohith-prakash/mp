@@ -119,3 +119,23 @@ func MagnitudeSubTest(a string, b string) {
 	}
 	fmt.Println(a2.ToString(), "-", b2.ToString(), "=", c.ToString())
 }
+
+func CleanTest(a string, b string) {
+	a2, err := bigint.StrToBigInt(a)
+	if err != nil {
+		fmt.Println("A cannot be converted")
+		return
+	}
+	b2, err := bigint.StrToBigInt(b)
+	if err != nil {
+		fmt.Println("A cannot be converted")
+		return
+	}
+	c, err := bigint.MagnitudeSub(a2, b2)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	c.Clean()
+	fmt.Println(a2.ToString(), "-", b2.ToString(), "=", c.ToString())
+}
