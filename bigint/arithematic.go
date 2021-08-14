@@ -48,7 +48,6 @@ func MagnitudeAdd(a BigInt, b BigInt) BigInt {
 	}
 }
 
-//Unless |a|>= |b| don't use this
 func MagnitudeSub(a BigInt, b BigInt) (BigInt, error) {
 	var result []int8 = make([]int8, 0)
 	var carry, diff int8
@@ -56,9 +55,6 @@ func MagnitudeSub(a BigInt, b BigInt) (BigInt, error) {
 	l1, l2 := a.num, b.num
 	len1 := len(l1)
 	len2 := len(l2)
-	// if len2 > len1 {
-	// 	return BigInt{}, errors.New("Numer with larger magnitude must be first argument")
-	// }
 	if MagnitudeCompare(a, b) == Lesser {
 		return BigInt{}, errors.New("Numer with larger magnitude must be first argument")
 	}
@@ -91,6 +87,43 @@ func MagnitudeSub(a BigInt, b BigInt) (BigInt, error) {
 	return answer, nil
 }
 
+//Unless |a|>= |b| don't use this
+func magnitudeSub(a BigInt, b BigInt) BigInt {
+	var result []int8 = make([]int8, 0)
+	var carry, diff int8
+	var i int
+	l1, l2 := a.num, b.num
+	len1 := len(l1)
+	len2 := len(l2)
+	carry = 0
+	for i = 0; i < len2; i++ {
+		diff = ((l1[i] - l2[i]) - carry)
+		if diff < 0 {
+			diff += 10
+			carry++
+		} else {
+			carry = 0
+		}
+		result = append(result, diff)
+	}
+	for i = len2; i < len1; i++ {
+		diff = l1[i] - carry
+		if diff < 0 {
+			diff += 10
+			carry++
+		} else {
+			carry = 0
+		}
+		result = append(result, diff)
+	}
+	answer := BigInt{
+		sign: Positive,
+		num:  result,
+	}
+	answer.Clean()
+	return answer
+}
+
 func (a BigInt) checkIfAllZero() bool {
 	for i := range a.num {
 		if a.num[i] != 0 {
@@ -117,7 +150,20 @@ func (a *BigInt) Clean() {
 	a.num = a.num[:length-numOfZeros]
 }
 
-// func Add(a BigInt,b BigInt) BigInt {
-// 	c := MagnitudeAdd(a,b)
-
-// }
+func Add(a BigInt, b BigInt) BigInt {
+	var c BigInt
+	if a.sign == b.sign {
+		c = MagnitudeAdd(a, b)
+		c.sign = a.sign
+		return c
+	}
+	if MagnitudeCompare(a, b) != Lesser {
+		c = magnitudeSub(a, b)
+		c.sign = a.sign
+	} else {
+		c = magnitudeSub(b, a)
+		c.sign = b.sign
+	}
+	c.Clean()
+	return c
+}
