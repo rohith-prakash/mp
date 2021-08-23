@@ -219,3 +219,14 @@ func MagnitudeMultiplySimple(a BigInt, b BigInt) BigInt {
 	c.Clean()
 	return c
 }
+
+func MultiplySimple(a BigInt, b BigInt) BigInt {
+	c := MagnitudeMultiplySimple(a, b)
+	if a.sign == b.sign {
+		c.sign = Positive
+	} else if !c.checkIfAllZero() {
+		c.sign = Negative
+	}
+
+	return c
+}

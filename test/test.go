@@ -184,3 +184,18 @@ func MagnitudeMultiplySimpleTest(a string, b string) {
 	c := bigint.MagnitudeMultiplySimple(a2, b2)
 	fmt.Println(a2.ToString(), "*", b2.ToString(), "=", c.ToString())
 }
+
+func MultiplySimpleTest(a string, b string) {
+	a2, err := bigint.StrToBigInt(a)
+	if err != nil {
+		fmt.Println("A cannot be converted")
+		return
+	}
+	b2, err := bigint.StrToBigInt(b)
+	if err != nil {
+		fmt.Println("A cannot be converted")
+		return
+	}
+	c := bigint.MultiplySimple(a2, b2)
+	fmt.Println(a2.ToString(), "*", b2.ToString(), "=", c.ToString())
+}
