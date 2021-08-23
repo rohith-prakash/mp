@@ -179,8 +179,8 @@ func (a BigInt) Abs() BigInt {
 }
 
 func (a BigInt) Negate() BigInt {
-	var num []int8 = make([]int8, len(a.num))
-	copy(num, a.num)
+	//var num []int8 = make([]int8, len(a.num))
+	//copy(num, a.num)
 	var sign Sign
 	if a.sign == Negative || a.checkIfAllZero() {
 		sign = Positive
@@ -189,7 +189,7 @@ func (a BigInt) Negate() BigInt {
 	}
 	c := BigInt{
 		sign: sign,
-		num:  num,
+		num:  a.num,
 	}
 	return c
 }
@@ -197,3 +197,5 @@ func (a BigInt) Negate() BigInt {
 func Sub(a BigInt, b BigInt) BigInt {
 	return Add(a, b.Negate())
 }
+
+//func SimpleMultiply
