@@ -198,4 +198,24 @@ func Sub(a BigInt, b BigInt) BigInt {
 	return Add(a, b.Negate())
 }
 
-//func SimpleMultiply
+func MagnitudeMultiplySimple(a BigInt, b BigInt) BigInt {
+	len_a := len(a.num)
+	len_b := len(b.num)
+	product := make([]int8, len_a+len_b)
+	var carry int8 = 0
+	for j := 0; j < len_b; j++ {
+		carry = 0
+		for i := 0; i < len_a; i++ {
+			product[i+j] += carry + a.num[i]*b.num[j]
+			carry = product[i+j] / 10
+			product[i+j] = product[i+j] % 10
+		}
+		product[j+len_a] = carry
+	}
+	c := BigInt{
+		sign: Positive,
+		num:  product,
+	}
+	c.Clean()
+	return c
+}
