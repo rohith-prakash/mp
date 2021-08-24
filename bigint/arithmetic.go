@@ -2,6 +2,7 @@ package bigint
 
 import (
 	"errors"
+	"fmt"
 )
 
 func reverse(l []int8) {
@@ -35,11 +36,17 @@ func MagnitudeAdd(a BigInt, b BigInt) BigInt {
 		sum = l1[i] + l2[i] + carry
 		result = append(result, sum%10)
 		carry = sum / 10
+		fmt.Println("sum = ", sum)
 	}
-	for i = len1; i < len2; i++ {
-		sum = l2[i] + carry
-		result = append(result, sum%10)
-		carry = sum / 10
+	if len1 != len2 {
+		for i = len1; i < len2; i++ {
+			sum = l2[i] + carry
+			result = append(result, sum%10)
+			carry = sum / 10
+			fmt.Println("sum = ", sum)
+		}
+	} else {
+		result = append(result, carry)
 	}
 
 	return BigInt{
